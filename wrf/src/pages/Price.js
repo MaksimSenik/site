@@ -1,9 +1,9 @@
-import { UseEffect, UseState} from 'react';
+import { useEffect, useState} from 'react';
 
 function Price()
 {
-    const[data, setData] = UseState([]);
-    UseEffect(()=>{
+    const[data, setData] = useState([]);
+    useEffect(()=>{
         fetch("http://localhost:80/coffee.php")
             .then(response=>response.json())
             .then(json=>setData(json))
@@ -16,11 +16,18 @@ function Price()
 
     return (
         <div>
+            <table>
+                <tr>
+                    <th>Название</th>
+                    <th>Цена</th>
+                    <th>Агент</th>
+                </tr>
+                
             {data.map(item=>(
-            <h1>{item.Name}</h1>,
-            <h1>{item.Price}</h1>,
-            <h1>{item.Agent}</h1>
-        ))}
+                <tr><td>{item.Name}</td><td>{item.Price}</td><td>{item.Agent}</td></tr>
+            ))
+        }
+            </table>
         </div>
     )
 

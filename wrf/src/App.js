@@ -4,7 +4,9 @@ import About from './pages/About';
 import Contacts from './pages/Contacts';
 import Baristas from './pages/Baristas';
 import Price from './pages/Price';
+import ValorantCafeCards from './pages/ValorantCafeCards';
 import './App.css';
+
 
 function App() {
   return (
@@ -13,7 +15,7 @@ function App() {
         <nav>
           <Link to = "/About">О нас</Link><br/>
           <Link to = "/Contacts">Где нас найти</Link><br/>
-          <Link to = "/Baristas">Наша Команда</Link>
+          <Link to = "/Baristas">Наша Команда</Link><br/>
           <Link to = "/Price">ПрайсЛист </Link>
 
         </nav>
@@ -23,7 +25,7 @@ function App() {
           <Route path = "/Baristas" element={<Baristas></Baristas>}></Route>
           <Route path = "/Price" element={<Price></Price>}></Route>
         </Routes>
-
+        <ValorantCafeCards/>
       </header>
     </div>
   );
