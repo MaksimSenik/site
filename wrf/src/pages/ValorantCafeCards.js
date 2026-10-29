@@ -63,11 +63,15 @@ export default function ValorantCafeCards() {
   };
 
   return (
-    <div className="bg-[#0b1017] min-h-screen text-[#EEEEEE] py-12 px-4 font-sans select-none">
+    <div className="val-page-bg text-[#EEEEEE] py-12 px-4 select-none">
       
-      <div className="max-w-md mx-auto border-l-4 border-[#FF4655] pl-3 mb-12">
-        <p className="text-[10px] tracking-widest text-[#FF4655] font-mono font-bold animate-pulse">// NIGHT.MARKET // ARRIVAL</p>
-        <h2 className="text-2xl font-black uppercase tracking-wider text-white mt-1">СЕКРЕТНЫЕ ПРЕДЛОЖЕНИЯ</h2>
+      <div className="val-header-container">
+        <p className="val-header-sub animate-pulse">
+          // NIGHT.MARKET // ARRIVAL
+        </p>
+        <h2 className="val-header-title">
+          СЕКРЕТНЫЕ ПРЕДЛОЖЕНИЯ
+        </h2>
       </div>
 
       <div className="market-grid-container">
@@ -84,72 +88,79 @@ export default function ValorantCafeCards() {
               {/* ЛАЗЕРНЫЙ КЛИК ТРИГГЕР */}
               <div className={`opening-glitch-line ${isGlitching ? 'trigger-glitch-line' : ''}`} />
 
-                        {/* РУБАШКА КАРТЫ */}
-            <div className={`card-layer market-cover valorant-clip ${isOpened ? 'is-opened' : ''}`}>
-            <div className="logo-v">V</div>
-            
-            {/* Контейнер в одну строку (row) с выравниванием по низу букв */}
-            <div 
-                style={{ 
-                display: 'flex', 
-                flexDirection: 'row', 
-                alignItems: 'flex-end', 
-                marginTop: '20px',
-                userSelect: 'none'
-                }}
-            >
-                {/* Основной БЕЛЫЙ текст */}
-                <span 
-                style={{ 
-                    color: '#FFFFFF', 
-                    fontSize: '11px', 
-                    fontFamily: 'monospace', 
-                    fontWeight: 'bold', 
-                    letterSpacing: '0.1em',
-                    textTransform: 'uppercase'
-                }}
-                >
-                ОТКРЫТЬ КАРТУ
-                </span>
+              {/* РУБАШКА КАРТЫ */}
+              <div className={`card-layer market-cover valorant-clip ${isOpened ? 'is-opened' : ''}`}>
+                <div className="logo-v">V</div>
                 
-                {/* Микро-текст: правее и слегка опущен под линию основного текста */}
-                <span 
-                style={{ 
-                    color: '#FF4655', 
-                    fontSize: '7.5px', 
-                    fontFamily: 'monospace', 
-                    opacity: 0.8, 
-                    marginLeft: '4px',    /* Отступ вправо от текста */
-                    marginBottom: '-3px', /* Сдвиг вниз, чтобы быть «прямо под» правым краем */
-                    textTransform: 'lowercase'
-                }}
+                <div 
+                  style={{ 
+                    display: 'flex', 
+                    flexDirection: 'row', 
+                    alignItems: 'flex-end', 
+                    marginTop: '20px',
+                    userSelect: 'none'
+                  }}
                 >
-                .sys_lock_0{card.id}
-                </span>
-            </div>
-            </div>
+                  <span 
+                    style={{ 
+                      color: '#FFFFFF', 
+                      fontSize: '11px', 
+                      fontFamily: 'monospace', 
+                      fontWeight: 'bold', 
+                      letterSpacing: '0.1em',
+                      textTransform: 'uppercase'
+                    }}
+                  >
+                    ОТКРЫТЬ КАРТУ
+                  </span>
+                  
+                  <span 
+                    style={{ 
+                      color: '#FF4655', 
+                      fontSize: '7.5px', 
+                      fontFamily: 'monospace', 
+                      opacity: 0.8, 
+                      marginLeft: '4px',
+                      marginBottom: '-3px',
+                      textTransform: 'lowercase'
+                    }}
+                  >
+                    .sys_lock_0{card.id}
+                  </span>
+                </div>
+              </div>
 
-
-
-              {/* ЛИЦЕВАЯ СТОРОНА */}
-              <div className="card-layer justify-between">
+              {/* ЛИЦЕВАЯ СТОРОНА — ИСПРАВЛЕНО: Теперь динамически передаются статусы открытой/закрытой карты */}
+              <div className={`card-layer front-card-layout ${isOpened ? 'opened-card' : 'closed-card'}`}>
                 <div className="market-discount-badge">
                   {card.discount}
                 </div>
 
-                <div>
-                  <span className="text-[9px] uppercase font-bold tracking-widest text-gray-500 block mb-1 font-mono">
+                {/* Контейнер верхней части */}
+                <div className="card-top-group">
+                  {/* Категория: при открытии строго по центру, при ховере уезжает наверх */}
+                  <span className="card-category-animated text-[10px] uppercase font-bold tracking-widest text-gray-500 font-mono">
                     // {card.category}
                   </span>
-                  <h3 className="text-xs font-black tracking-wide uppercase mb-2 text-white leading-tight min-h-[32px] pr-8 flex items-center">
-                    {card.title}
-                  </h3>
-                  <p className="text-[11px] text-gray-400 leading-normal line-clamp-6">
-                    {card.description}
-                  </p>
+                  
+                  {/* Основной текст: плавно раскрывается сверху вниз */}
+                  <div className="card-hover-content">
+                    <h3 
+                      className="card-title-single-line uppercase text-white pr-12 mt-2 mb-2"
+                      data-text={card.title}
+                    >
+                      {card.title}
+                    </h3>
+                    
+                    {/* ИСПРАВЛЕНО: убран класс line-clamp для полноценной работы скрытого скролла */}
+                    <p className="text-[11px] text-gray-400 leading-normal">
+                      {card.description}
+                    </p>
+                  </div>
                 </div>
 
-                <div>
+                {/* Нижняя часть (теги и кнопка): плавно поднимается снизу */}
+                <div className="card-hover-footer w-full">
                   <div className="flex flex-wrap gap-1 mb-3">
                     {card.tags.map((tag, idx) => (
                       <span key={idx} className="text-[8px] font-mono font-semibold bg-[#16202c] text-gray-300 px-1.5 py-0.5 border border-[#2b374f] mr-1.5">

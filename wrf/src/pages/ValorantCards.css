@@ -1,15 +1,137 @@
-/* Контейнер для сетки */
+@import url('https://googleapis.com');
+
+/* Фиксируем высоту для корневых элементов */
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background-color: #060b10;
+}
+
+/* ОБНОВЛЕННЫЙ ФОН НА ВЕСЬ ЭКРАН */
+.val-page-bg {
+  background-color: #060b10 !important;
+  background-image: 
+    linear-gradient(rgba(11, 16, 23, 0.6) 0%, #060b10 100%),
+    radial-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 0);
+  background-size: 100% 100%, 16px 16px;
+  min-height: 100vh !important; 
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* СТИЛИЗАЦИЯ НАВИГАЦИОННОЙ ПАНЕЛИ (NAVBAR) */
+.val-navbar {
+  width: 100%;
+  background: rgba(11, 16, 23, 0.75); 
+  border-bottom: 1px solid rgba(255, 70, 85, 0.25); 
+  backdrop-filter: blur(10px); 
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-sizing: border-box;
+}
+
+.val-nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+}
+
+.val-nav-logo {
+  font-family: 'Oswald', sans-serif !important;
+  font-weight: 900;
+  font-size: 18px;
+  letter-spacing: 0.1em;
+  color: #FF4655 !important; 
+  text-decoration: none !important;
+  text-shadow: 0 0 10px rgba(255, 70, 85, 0.4);
+}
+
+.val-nav-links-group {
+  display: flex;
+  flex-direction: row !important; 
+  gap: 28px; 
+}
+
+.val-nav-link {
+  font-family: 'Oswald', sans-serif !important;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8f98a5 !important; 
+  text-decoration: none !important;
+  position: relative;
+  padding: 6px 0;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.val-nav-link:hover {
+  color: #ffffff !important;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+}
+
+.val-nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: #FF4655;
+  box-shadow: 0 0 8px #FF4655;
+  transition: width 0.2s ease, left 0.2s ease;
+}
+
+.val-nav-link:hover::after {
+  width: 100%;
+  left: 0;
+}
+
+/* СТИЛИЗАЦИЯ ШАПКИ СТРАНИЦЫ */
+.val-header-container {
+  max-width: 450px;
+  margin: 0 auto 3rem auto;
+  border-left: 4px solid #FF4655;
+  padding-left: 16px;
+}
+
+.val-header-sub {
+  font-family: monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: #FF4655;
+  text-transform: uppercase;
+}
+
+.val-header-title {
+  font-family: 'Oswald', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: 28px !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin-top: 4px;
+  line-height: 1.1;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.1); 
+}
+
+/* Сетка контента */
 .market-grid-container {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr)); /* Строго 2 колонки */
+  grid-template-columns: repeat(2, minmax(0, 1fr)); 
   gap: 16px;
   justify-items: center;
   align-items: center;
-  max-width: 620px;
+  max-width: 700px; 
   margin: 0 auto;
 }
 
-/* Срез угла */
 .valorant-clip {
   clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
 }
@@ -17,7 +139,7 @@
 /* КОМПАКТНАЯ ВЕРТИКАЛЬНАЯ КАРТОЧКА */
 .night-market-card-v3 {
   width: 100%;
-  max-width: 270px;
+  max-width: 310px; 
   height: 390px;
   position: relative !important;
   cursor: pointer;
@@ -42,12 +164,11 @@
   height: 100% !important;
   display: flex !important;
   flex-direction: column !important;
-  justify-content: space-between !important;
   padding: 20px !important;
   box-sizing: border-box !important;
 }
 
-/* РУБАШКА КАРТЫ (Непрозрачная, перекрывает всё) */
+/* РУБАШКА КАРТЫ */
 .market-cover {
   z-index: 30 !important;
   background: linear-gradient(135deg, #18202c 0%, #10151f 100%) !important;
@@ -60,7 +181,6 @@
   visibility: visible;
 }
 
-/* Когда карта открыта — полностью её прячем и отключаем видимость */
 .market-cover.is-opened {
   opacity: 0 !important;
   transform: translateY(-15px) scale(0.95) !important;
@@ -68,7 +188,6 @@
   visibility: hidden;
 }
 
-/* Сетка на рубашке */
 .market-cover::before {
   content: "";
   position: absolute;
@@ -78,75 +197,237 @@
   background-size: 10px 10px;
 }
 
-/* ЯРЛЫК СКИДКИ (Строго справа вверху) */
-.market-discount-badge {
-  position: absolute !important;
-  top: 0 !important;
-  right: 0 !important;
-  left: auto !important; /* Отменяем прижатие к левому краю */
-  background-color: #16202c !important;
-  border-bottom: 2px solid #2b374f !important;
-  border-left: 2px solid #2b374f !important;
-  border-top: none !important;
-  border-right: none !important;
-  padding: 4px 10px !important;
-  font-family: monospace !important;
-  font-size: 11px !important;
-  font-weight: bold !important;
-  color: #fbbf24 !important; /* Янтарный цвет Valorant */
-  z-index: 25 !important;
+/* ========================================================
+   ИСПРАВЛЕННЫЙ ВНУТРЕННИЙ КОНТЕНТ И ЯРКИЕ ЦВЕТА
+   ======================================================== */
+
+.front-card-layout {
+  justify-content: space-between !important;
+  z-index: 10 !important;
 }
 
-/* НЕОНОВЫЙ ЛУЧ ГЛИТЧА */
-.opening-glitch-line {
-  position: absolute;
-  width: 160%;
-  height: 6px;
-  background: #FF4655;
-  top: 50%;
-  left: -30%;
-  transform: rotate(-45deg) scaleX(0);
-  z-index: 40;
+/* Если карта закрыта, полностью скрываем лицевой контент, чтобы не мешался */
+.front-card-layout.closed-card {
+  display: none !important;
+}
+
+.card-top-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* Категория: по центру в покое, уезжает вверх при ховере */
+.card-category-animated {
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+  color: #6b7280 !important; /* Яркий серый цвет по умолчанию */
+  transform: translateY(165px); 
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), color 0.3s ease;
+}
+
+.night-market-card-v3:hover .card-category-animated {
+  transform: translateY(0);
+}
+.theme-red-card:hover .card-category-animated { color: #FF4655 !important; }
+.theme-blue-card:hover .card-category-animated { color: #00F0FF !important; }
+
+/* ЗАГОЛОВКИ И ОПИСАНИЕ КАРТЫ */
+.card-title-single-line {
+  font-family: 'Oswald', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: 18px !important;       
+  line-height: 1.2 !important;
+  letter-spacing: 0.05em !important; 
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  display: block !important;
+  width: 100% !important;
+  margin: 0 !important; 
+  position: relative;
+  color: #ffffff !important; /* ЖЕСТКИЙ БЕЛЫЙ ЦВЕТ */
+}
+
+/* Контент и подвал по умолчанию прозрачные */
+.card-hover-content,
+.card-hover-footer {
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
+  transition: opacity 0.35s cubic-bezier(0.25, 1, 0.5, 1), 
+              transform 0.35s cubic-bezier(0.25, 1, 0.5, 1),
+              visibility 0.35s;
 }
 
+.card-hover-content { transform: translateY(15px); }
+.card-hover-footer { transform: translateY(20px); }
+
+/* Плавное проявление при ховере на ОТКРЫТУЮ карту */
+.night-market-card-v3:hover .front-card-layout.opened-card .card-hover-content,
+.night-market-card-v3:hover .front-card-layout.opened-card .card-hover-footer {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  transform: translateY(0);
+}
+
+.night-market-card-v3:hover .card-hover-content { transition-delay: 0.05s; }
+.night-market-card-v3:hover .card-hover-footer { transition-delay: 0.1s; }
+
+/* ПРОКРУТКА, ЗА ТУХАНИЕ И ЦВЕТ ОПИСАНИЯ */
+.card-hover-content p {
+  color: #9ca3af !important; /* КОНТРАСТНЫЙ СВЕТЛО-СЕРЫЙ ЦВЕТ ДЛЯ ОПИСАНИЯ */
+  padding: 0 14px 15px 14px !important;
+  box-sizing: border-box;
+  max-height: 120px; 
+  overflow-y: auto;   
+  mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+}
+
+.card-hover-content p::-webkit-scrollbar { width: 3px; }
+.card-hover-content p::-webkit-scrollbar-track { background: rgba(30, 38, 56, 0.3); }
+.card-hover-content p::-webkit-scrollbar-thumb { background: #3f4f6e; border-radius: 2px; }
+
+/* ТЕГИ И КНОПКА */
+.card-hover-footer span {
+  color: #d1d5db !important; /* Цвет текста тегов */
+}
+
+/* РАБОЧИЙ ГЛИТЧ-ЭФФЕКТ НА ПОЛОСЕ ПРОКРУТКИ */
+.theme-red-card:hover .card-hover-content p::-webkit-scrollbar-thumb {
+  animation: scrollbarGlitchRed 0.4s steps(1) infinite;
+}
+.theme-blue-card:hover .card-hover-content p::-webkit-scrollbar-thumb {
+  animation: scrollbarGlitchBlue 0.4s steps(1) infinite;
+}
+
+@keyframes scrollbarGlitchRed {
+  0%, 100% { background-color: #FF4655; box-shadow: 0 0 10px #FF4655; }
+  20% { background-color: #3f4f6e; box-shadow: none; }
+  40% { background-color: #FF4655; box-shadow: 0 0 4px #FF4655; }
+  60% { background-color: #111622; box-shadow: none; }
+  80% { background-color: #FF4655; box-shadow: 0 0 14px #FF4655, 0 0 4px #ffffff; }
+}
+
+@keyframes scrollbarGlitchBlue {
+  0%, 100% { background-color: #00F0FF; box-shadow: 0 0 10px #00F0FF; }
+  20% { background-color: #3f4f6e; box-shadow: none; }
+  40% { background-color: #00F0FF; box-shadow: 0 0 4px #00F0FF; }
+  60% { background-color: #111622; box-shadow: none; }
+  80% { background-color: #00F0FF; box-shadow: 0 0 14px #00F0FF, 0 0 4px #ffffff; }
+}
+
+/* ЗАТУХАЮЩИЙ ГЛИТЧ-ЭФФЕКТ ДЛЯ ЗАГОЛОВКА */
+.night-market-card-v3:hover .card-title-single-line::before,
+.night-market-card-v3:hover .card-title-single-line::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #111622;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.night-market-card-v3:hover .card-title-single-line::before {
+  left: -2px;
+  text-shadow: 2px 0 #FF4655;
+  clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+  animation: valGlitchAnim 0.4s cubic-bezier(.25, .46, .45, .94) both 1;
+}
+
+.night-market-card-v3:hover .card-title-single-line::after {
+  left: 2px;
+  text-shadow: -2px 0 #00F0FF;
+  clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%);
+  animation: valGlitchAnim 0.4s cubic-bezier(.25, .46, .45, .94) reverse both 1;
+}
+
+@keyframes valGlitchAnim {
+  0% { clip-path: polygon(0 15%, 100% 15%, 100% 30%, 0 30%); opacity: 1; }
+  25% { clip-path: polygon(0 60%, 100% 60%, 100% 65%, 0 65%); transform: skewX(-3deg); }
+  50% { clip-path: polygon(0 5%, 100% 5%, 100% 20%, 0 20%); transform: skewX(3deg); }
+75% { clip-path: polygon(0 80%, 100% 80%, 100% 85%, 0 85%); transform: skewX(-1deg); }
+100% { clip-path: polygon(0 0, 0 0, 0 0, 0 0); opacity: 0; }
+}
+.night-market-card-v3:hover .card-hover-content p {
+animation: textFlicker 0.3s ease-out forwards;
+}
+@keyframes textFlicker {
+0% { opacity: 0; }
+40% { opacity: 0.8; }
+70% { opacity: 0.4; }
+100% { opacity: 1; }
+}
+/* ЯРЛЫК СКИДКИ */
+.market-discount-badge {
+position: absolute !important;
+top: 0 !important;
+right: 0 !important;
+left: auto !important;
+background-color: #16202c !important;
+border-bottom: 2px solid #2b374f !important;
+border-left: 2px solid #2b374f !important;
+border-top: none !important;
+border-right: none !important;
+padding: 4px 10px !important;
+font-family: monospace !important;
+font-size: 11px !important;
+font-weight: bold !important;
+color: #fbbf24 !important;
+z-index: 25 !important;
+}
+/* НЕОНОВЫЙ ЛУЧ ГЛИТЧА ПРИ КЛИКЕ */
+.opening-glitch-line {
+position: absolute;
+width: 160%;
+height: 6px;
+background: #FF4655;
+top: 50%;
+left: -30%;
+transform: rotate(-45deg) scaleX(0);
+z-index: 40;
+opacity: 0;
+pointer-events: none;
+}
 .theme-blue-card .opening-glitch-line { background: #00F0FF; }
 .trigger-glitch-line { animation: lineStrike 0.4s ease-out forwards; }
-
 @keyframes lineStrike {
-  0% { opacity: 0; transform: rotate(-45deg) scaleX(0); }
-  40% { opacity: 1; transform: rotate(-45deg) scaleX(1); filter: brightness(2) drop-shadow(0 0 12px currentColor); }
-  100% { opacity: 0; transform: rotate(-45deg) scaleX(1.3); }
+0% { opacity: 0; transform: rotate(-45deg) scaleX(0); }
+40% { opacity: 1; transform: rotate(-45deg) scaleX(1); filter: brightness(2) drop-shadow(0 0 12px currentColor); }
+100% { opacity: 0; transform: rotate(-45deg) scaleX(1.3); }
 }
-
-/* СВЕЧЕНИЯ */
+/* СВЕЧЕНИЯ КАРТОЧЕК */
 .theme-red-card:hover { border-color: #FF4655 !important; box-shadow: 0 0 20px rgba(255, 70, 85, 0.2), inset 0 0 15px rgba(255, 70, 85, 0.05); }
 .theme-blue-card:hover { border-color: #00F0FF !important; box-shadow: 0 0 20px rgba(0, 240, 255, 0.2), inset 0 0 15px rgba(0, 240, 255, 0.05); }
-
 .logo-v {
-  font-size: 3.5rem;
-  font-weight: 900;
-  color: #FF4655;
-  filter: drop-shadow(0 0 8px rgba(255, 70, 85, 0.5));
+font-size: 3.5rem;
+font-weight: 900;
+color: #FF4655;
+filter: drop-shadow(0 0 8px rgba(255, 70, 85, 0.5));
 }
-
 .val-btn {
-  background: transparent;
-  border: 1px solid #3f4f6e;
-  color: #d1d5db;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  padding: 9px 0;
-  width: 100%;
-  transition: all 0.2s ease;
+background: transparent;
+border: 1px solid #3f4f6e;
+color: #d1d5db;
+font-size: 10px;
+font-weight: 800;
+letter-spacing: 0.05em;
+text-transform: uppercase;
+padding: 9px 0;
+width: 100%;
+transition: all 0.2s ease;
 }
-
 .val-btn:hover {
-  background: #FF4655;
-  border-color: #FF4655;
-  color: white;
-  box-shadow: 0 0 12px rgba(255, 70, 85, 0.4);
+background: #FF4655;
+border-color: #FF4655;
+color: white;
+box-shadow: 0 0 12px rgba(255, 70, 85, 0.4);
 }

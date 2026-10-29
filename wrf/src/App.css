@@ -1,38 +1,85 @@
-.App {
-  text-align: center;
+/* ========================================================
+   ОБНОВЛЕННЫЙ NAVBAR ДЛЯ REACT ROUTER DOM
+   ======================================================== */
+
+.val-navbar {
+  width: 100%;
+  background: rgba(11, 16, 23, 0.75); /* Полупрозрачный темный фон */
+  border-bottom: 1px solid rgba(255, 70, 85, 0.25); /* Фирменная красная линия */
+  backdrop-filter: blur(10px); /* Размытие заднего фона */
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #9ca7be;
-  min-height: 100vh;
+.val-nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 24px;
   display: flex;
-  flex-direction: column;
+  justify-content: space-between; /* Логотип слева, ссылки справа */
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+/* Логотип VAL//CAFE */
+.val-nav-logo {
+  font-family: 'Oswald', sans-serif !important;
+  font-weight: 900;
+  font-size: 18px;
+  letter-spacing: 0.1em;
+  color: #FF4655 !important; /* Красный цвет Valorant */
+  text-decoration: none !important;
+  text-shadow: 0 0 10px rgba(255, 70, 85, 0.4);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Группа навигационных ссылок */
+.val-nav-links-group {
+  display: flex;
+  flex-direction: row !important; /* Строго в одну линию */
+  gap: 28px; /* Расстояние между кнопками */
+}
+
+/* Стили для ссылок-компонентов Link */
+.val-nav-link {
+  font-family: 'Oswald', sans-serif !important;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8f98a5 !important; /* Приглушенный цвет по умолчанию */
+  text-decoration: none !important;
+  position: relative;
+  padding: 6px 0;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+/* Эффект при наведении */
+.val-nav-link:hover {
+  color: #ffffff !important;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+}
+
+/* Линия под ссылкой */
+.val-nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: #FF4655;
+  box-shadow: 0 0 8px #FF4655;
+  transition: width 0.2s ease, left 0.2s ease;
+}
+
+.val-nav-link:hover::after {
+  width: 100%;
+  left: 0;
+}
+
+/* Контейнер для отображения контента под навигацией */
+.val-main-content {
+  width: 100%;
+  box-sizing: border-box;
 }
