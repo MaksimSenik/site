@@ -1,4 +1,5 @@
 import { useEffect, useState} from 'react';
+import "./Price.css"
 
 function Price()
 {
@@ -13,23 +14,31 @@ function Price()
 
 
 
-
-    return (
-        <div>
-            <table>
-                <tr>
-                    <th>Название</th>
-                    <th>Цена</th>
-                    <th>Агент</th>
-                </tr>
-                
-            {data.map(item=>(
-                <tr><td>{item.Name}</td><td>{item.Price}</td><td>{item.Agent}</td></tr>
-            ))
-        }
-            </table>
-        </div>
-    )
-
-}
-export default Price;
+    return(
+    <div>
+    <main className="menu-section">
+      <table className="valorant-table">
+        <thead>
+          <tr>
+            <th>Название</th>
+            <th>Цена</th>
+            <th>Агент</th>
+          </tr>
+        </thead>
+        <tbody>
+        {data.map(item => (
+            <tr 
+            key={item.Name} 
+            data-agent={item.Agent ? item.Agent.toLowerCase() : ''} /* Передаем имя агента в нижнем регистре */
+            >
+            <td>{item.Name}</td>
+            <td>{item.Price}</td>
+            <td>{item.Agent}</td>
+            </tr>
+        ))}
+        </tbody>
+      </table>
+    </main>
+  </div>
+)};
+export default Price

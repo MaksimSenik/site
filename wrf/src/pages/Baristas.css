@@ -1,0 +1,301 @@
+/* ==========================================================================
+   1. ГЛАВНЫЙ КОНТЕЙНЕР И СЕТКА СТРАНИЦЫ
+   ========================================================================== */
+
+.team-container {
+  padding: 60px 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: 'DIN Next W1G', 'Roboto', sans-serif;
+  color: #ece8e1;
+  position: relative;
+  overflow: hidden;
+  /* Создаем эффект мелкой тактической сетки из точек на фоне */
+  background-image: radial-gradient(rgba(236, 232, 225, 0.03) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+/* Декоративный тактический штамп в левом верхнем углу секции */
+.team-container::before {
+  content: 'SYS.LOC // COFFEE_CORE_PROTOCOL_2026';
+  position: absolute;
+  top: 20px;
+  left: 40px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #8b939c;
+  opacity: 0.3;
+}
+
+/* Декоративные «координаты» в правом нижнем углу секции */
+.team-container::after {
+  content: 'LAT. 43.6532° N // LONG. 79.3832° W';
+  position: absolute;
+  bottom: 20px;
+  right: 40px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #ff4655; /* Выделяем фирменным красным */
+  opacity: 0.4;
+}
+
+/* Главный заголовок Наша Команда */
+.team-title {
+  color: #ff4655; /* Красный цвет Valorant */
+  font-size: 36px;
+  font-weight: 900;
+  letter-spacing: 4px;
+  text-align: center;
+  text-shadow: 0 0 10px rgba(255, 70, 85, 0.2);
+  position: relative;
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%); /* Центрируем inline-block заголовок */
+  margin-bottom: 60px;
+}
+
+/* Красный тактический квадратик/полоса под заголовком */
+.team-title::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #ff4655 70%, transparent 70%, transparent 75%, #ff4655 75%, #ff4655 80%, transparent 80%);
+}
+
+/* Сетка карточек */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  position: relative;
+  z-index: 1;
+}
+
+
+/* ==========================================================================
+   2. СТИЛИЗАЦИЯ КАРТОЧКИ БАРИСТА И КОНТЕНТА
+   ========================================================================== */
+
+.barista-card {
+  background-color: #1f2326; /* Темный фон плашки закупки */
+  border: 1px solid rgba(236, 232, 225, 0.1);
+  border-top: 4px solid #ece8e1; /* Верхняя бежевая линия по умолчанию */
+  padding: 25px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: visible; /* Разрешаем отображение картинок за границами фона */
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Принудительно поднимаем весь текст и блоки выше фонового изображения */
+.barista-card > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Маленький технический бейдж сверху */
+.agent-badge {
+  font-size: 10px;
+  color: #8b939c;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+/* Имя Агента */
+.barista-card h2 {
+  font-size: 24px;
+  text-transform: uppercase;
+  margin: 0 0 5px 0;
+  letter-spacing: 1px;
+  color: #ffffff;
+}
+
+/* Роль (Шеф-бариста и т.д.) */
+.role {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #ffffff;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  margin-bottom: 15px;
+  transition: color 0.3s ease;
+}
+
+/* Описание способностей */
+.desc {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #cccccc;
+  margin-bottom: 20px;
+  flex-grow: 1; /* Выравнивает нижние блоки напитков по одной линии */
+}
+
+/* Блок фирменного напитка внутри карточки */
+.signature-drink {
+  background-color: rgba(15, 25, 35, 0.75) !important; /* Полупрозрачный фон, чтобы арт просвечивал */
+  border-left: 2px solid rgba(236, 232, 225, 0.2);
+  padding: 15px;
+  margin-top: auto;
+  position: relative;
+  z-index: 3;
+}
+
+.drink-label {
+  font-size: 10px;
+  font-weight: bold;
+  color: #8b939c;
+  letter-spacing: 1px;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.signature-drink h3 {
+  font-size: 15px;
+  margin: 0 0 5px 0;
+  color: #ece8e1;
+}
+
+.signature-drink p {
+  font-size: 13px;
+  margin: 0;
+  line-height: 1.4;
+  color: #a0a8b3;
+}
+
+
+/* ==========================================================================
+   3. ФОНОВЫЕ ПОЛУПРОЗРАЧНЫЕ АРТЫ АГЕНТОВ (ПСЕВДОЭЛЕМЕНТ BEFORE)
+   ========================================================================== */
+
+.barista-card::before {
+  content: '';            
+  position: absolute;
+  bottom: 0;              /* Прижимаем арт к самому низу карточки */
+  right: -5px;            /* Слегка уводим вправо за край для динамики */
+  width: 100%;            
+  height: 85%;            /* Высота, чтобы не перекрывать текстовый заголовок */
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  background-size: contain;
+  
+  /* Изначально картинка полностью скрыта и обесцвечена */
+  opacity: 0;
+  filter: grayscale(1) brightness(0.3); 
+  
+  z-index: 1;             /* Слой находится выше фона карточки, но строго ниже текста */
+  pointer-events: none;
+  
+  /* Плавное проявление, окрашивание и легкое движение вверх при наведении */
+  transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+              filter 0.4s ease, 
+              transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform: translateY(15px); 
+}
+
+/* При наведении на карточку арт проявляется, становится цветным и приподнимается */
+.barista-card:hover::before {
+  opacity: 0.25;          /* Прозрачность 25% для идеального баланса видимости */
+  filter: grayscale(0) brightness(0.9); 
+  transform: translateY(0); 
+}
+
+
+/* --- ТЕПЕРЬ ТУТ СТОЯТ ПРЯМЫЕ И ПОЛНЫЕ ССЫЛКИ НА ОФИЦИАЛЬНЫЕ АРТЫ --- */
+
+/* JETT */
+.barista-card[data-agent="jett"]::before {
+  background-image: url('https://contentstack.io');
+}
+
+/* CYPHER */
+.barista-card[data-agent="cypher"]::before {
+  background-image: url('https://contentstack.io');
+}
+
+/* VIPER */
+.barista-card[data-agent="viper"]::before {
+  background-image: url('https://contentstack.io');
+}
+
+/* REYNA */
+.barista-card[data-agent="reyna"]::before {
+  background-image: url('https://contentstack.io');
+}
+
+
+/* ==========================================================================
+   4. ДЕКОРАТИВНЫЕ ЭЛЕМЕНТЫ И ХОВЕРЫ ДЛЯ КОНКРЕТНЫХ АГЕНТОВ
+   ========================================================================== */
+
+/* Маленький красный технический уголок вверху справа */
+.barista-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 12px;
+  height: 12px;
+  border-top: 2px solid #ff4655;
+  border-right: 2px solid #ff4655;
+  opacity: 0.4;
+  z-index: 3;
+  transition: opacity 0.3s ease;
+}
+
+.barista-card:hover::after {
+  opacity: 1;
+}
+
+/* Имитация штрих-кода в блоке напитка */
+.signature-drink::after {
+  content: '||||| ||| || ||||';
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  font-size: 11px;
+  color: #8b939c;
+  opacity: 0.15;
+  letter-spacing: -1px;
+  font-family: monospace;
+  z-index: 4;
+}
+
+/* --- Изменение цвета карточек при наведении --- */
+
+/* JETT (Голубой) */
+.barista-card[data-agent="jett"]:hover {
+  border-top-color: #9bf3ff;
+  box-shadow: 0 10px 25px rgba(155, 243, 255, 0.15);
+  transform: translateY(-5px);
+}
+.barista-card[data-agent="jett"]:hover .role { color: #9bf3ff; }
+
+/* CYPHER (Оранжевый) */
+.barista-card[data-agent="cypher"]:hover {
+  border-top-color: #ff9800;
+  box-shadow: 0 10px 25px rgba(255, 152, 0, 0.15);
+  transform: translateY(-5px);
+}
+.barista-card[data-agent="cypher"]:hover .role { color: #ff9800; }
+
+/* VIPER (Зеленый) */
+.barista-card[data-agent="viper"]:hover {
+  border-top-color: #00ff66;
+  box-shadow: 0 10px 25px rgba(0, 255, 102, 0.15);
+  transform: translateY(-5px);
+}
+.barista-card[data-agent="viper"]:hover .role { color: #00ff66; }
+
+/* REYNA (Фиолетовый) */
+.barista-card[data-agent="reyna"]:hover {
+  border-top-color: #c44dff;
+  box-shadow: 0 10px 25px rgba(196, 77, 255, 0.15);
+  transform: translateY(-5px);
+}
+.barista-card[data-agent="reyna"]:hover .role { color: #c44dff; }

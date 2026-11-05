@@ -1,48 +1,14 @@
 import React, { useState } from 'react';
+import { useEffect, useState} from 'react';
 import './ValorantCards.css';
 
-const cardsData = [
-  {
-    id: 1,
-    category: 'СОБЫТИЕ',
-    title: 'WATCH PARTY: VCT FINALS',
-    description: 'Занимай позицию у большого экрана! Включаем трансляцию финала турнира, завариваем двойной эспрессо. Ошибки не прощаются.',
-    tags: ['LIVE', 'VCT'],
-    btnText: 'ЗАБРОНИРОВАТЬ СТОЙКУ',
-    themeClass: 'theme-red-card',
-    discount: '-10%'
-  },
-  {
-    id: 2,
-    category: 'АКЦИЯ',
-    title: 'СЕТ «ДУЭЛЯНТ»: РЫВОК',
-    description: 'Хватит эко-раундов. Двойной фильтр-кофе и горячий панини с рваной говядиной по специальной цене. Быстрый буст энергии.',
-    tags: ['PROMO', 'COMBO'],
-    btnText: 'КУПИТЬ В ЗАКУПЕ',
-    themeClass: 'theme-red-card',
-    discount: '-25%'
-  },
-  {
-    id: 3,
-    category: 'НОВЫЙ НАПИТОК',
-    title: 'NEON: SPARK LATTE',
-    description: 'Цитрусовый юзу, яркая синяя матча и двойной шот эспрессо с искристой взрывной крошкой. Бьет по сонливости быстрее всех.',
-    tags: ['AGENT', 'NEW'],
-    btnText: 'В КОРЗИНУ',
-    themeClass: 'theme-blue-card',
-    discount: 'NEW'
-  },
-  {
-    id: 4,
-    category: 'ИНТЕРАКТИВ',
-    title: 'CAFE BATTLE PASS',
-    description: 'Каждая чашка приближает тебя к рангу Радианита. Копи XP с заказов, открывай эксклюзивные мерч-брелки и секретное меню.',
-    tags: ['XP', 'PASS'],
-    btnText: 'ПРОВЕРИТЬ XP',
-    themeClass: 'theme-blue-card',
-    discount: 'XP x2'
-  }
-];
+const[data, setData] = useState([]);
+useEffect(()=>{
+  fetch("http://localhost:80/cafecards.php")
+  .then(response=>response.json)
+  .then(json=>setData(json))
+})
+
 
 export default function ValorantCafeCards() {
   const [openedCards, setOpenedCards] = useState({});
