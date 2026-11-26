@@ -1,0 +1,482 @@
+@import url('https://googleapis.com');
+
+:root {
+  --val-bg: #090e14;
+  --val-surface: #101820;
+  --val-light: #ece8e1;
+  --val-red: #ff4655;
+  --val-border: rgba(236, 232, 225, 0.12);
+}
+
+.val-loc-page {
+  position: relative;
+  background-color: var(--val-bg);
+  color: var(--val-light);
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  padding: 80px 24px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.val-loc-page *,
+.val-loc-page *::before,
+.val-loc-page *::after {
+  box-sizing: border-box;
+}
+
+.val-grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(to right, var(--val-border) 1px, transparent 1px);
+  background-size: 25% 100%;
+  pointer-events: none;
+  opacity: 0.35;
+}
+
+.val-container {
+  position: relative;
+  max-width: 1140px;
+  margin: 0 auto;
+  z-index: 1;
+}
+
+.val-loc-page h1,
+.val-loc-page h2,
+.val-loc-page h3 {
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--val-light);
+  margin: 0;
+}
+
+/* Hero */
+.val-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: var(--val-red);
+  margin-bottom: 16px;
+}
+
+.val-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--val-red);
+}
+
+.val-title {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  line-height: 1.05;
+  margin-bottom: 20px;
+}
+
+.val-accent {
+  color: var(--val-red);
+  font-weight: 700;
+}
+
+.val-lead {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: #cbd5e1;
+  max-width: 680px;
+  margin-bottom: 48px;
+}
+
+/* Переключатель точек (Map Selector) */
+.val-map-selector {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.val-map-btn {
+  background: var(--val-surface);
+  border: 1px solid var(--val-border);
+  color: var(--val-light);
+  padding: 20px 24px;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.val-map-btn:hover {
+  border-color: var(--val-red);
+}
+
+.val-map-btn.active {
+  background: var(--val-red);
+  border-color: var(--val-red);
+  clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 0 100%);
+}
+
+.val-map-sector {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  opacity: 0.85;
+}
+
+.val-map-name {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.4rem;
+  letter-spacing: 0.04em;
+}
+
+/* Основная сетка терминала */
+.val-terminal-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 24px;
+  margin-bottom: 64px;
+}
+
+.val-intel-card {
+  position: relative;
+  background: var(--val-surface);
+  border: 1px solid rgba(255, 70, 85, 0.4);
+  border-left: 3px solid var(--val-red);
+  padding: 36px;
+}
+
+.val-status-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: #4ade80;
+  margin-bottom: 16px;
+}
+
+.val-status-pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 8px #4ade80;
+}
+
+.val-intel-card h2 {
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+.val-address-main {
+  font-size: 1.05rem;
+  color: #cbd5e1;
+  margin: 0 0 24px 0;
+}
+
+.val-coords-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  background: #090e14;
+  border: 1px solid var(--val-border);
+  padding: 14px 18px;
+  margin-bottom: 24px;
+}
+
+.val-mini-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: #8b978f;
+  margin-bottom: 4px;
+}
+
+.val-coords-value {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.2rem;
+  letter-spacing: 0.08em;
+  color: var(--val-light);
+}
+
+.val-copy-btn {
+  background: transparent;
+  border: 1px solid var(--val-red);
+  color: var(--val-red);
+  padding: 8px 14px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.val-copy-btn:hover {
+  background: var(--val-red);
+  color: var(--val-light);
+}
+
+.val-info-row {
+  margin-bottom: 22px;
+}
+
+.val-info-text {
+  font-size: 1rem;
+  color: var(--val-light);
+}
+
+.val-landmarks-list {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.val-landmarks-list li {
+  font-size: 0.95rem;
+  color: #cbd5e1;
+  line-height: 1.5;
+}
+
+.val-features-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+.val-spec-tag {
+  background: #090e14;
+  border: 1px solid var(--val-border);
+  padding: 6px 12px;
+  font-size: 12px;
+  color: var(--val-light);
+}
+
+/* Тактический радар (Карта) */
+.val-radar-box {
+  background: var(--val-surface);
+  border: 1px solid var(--val-border);
+  display: flex;
+  flex-direction: column;
+}
+
+.val-radar-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 14px 20px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  border-bottom: 1px solid var(--val-border);
+}
+
+.val-radar-screen {
+  position: relative;
+  flex: 1;
+  min-height: 300px;
+  background-color: #070b10;
+  background-image:
+    linear-gradient(rgba(255, 70, 85, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 70, 85, 0.07) 1px, transparent 1px);
+  background-size: 32px 32px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.val-radar-circle {
+  position: absolute;
+  border: 1px dashed rgba(236, 232, 225, 0.15);
+  border-radius: 50%;
+}
+
+.val-radar-circle.c1 {
+  width: 160px;
+  height: 160px;
+}
+
+.val-radar-circle.c2 {
+  width: 280px;
+  height: 280px;
+}
+
+.val-radar-crosshair-x {
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background: rgba(236, 232, 225, 0.08);
+}
+
+.val-radar-crosshair-y {
+  position: absolute;
+  height: 100%;
+  width: 1px;
+  background: rgba(236, 232, 225, 0.08);
+}
+
+.val-pin-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.val-pin-core {
+  width: 14px;
+  height: 14px;
+  background: var(--val-red);
+  transform: rotate(45deg);
+  border: 2px solid var(--val-light);
+  z-index: 2;
+}
+
+.val-pin-ping {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--val-red);
+  animation: radarPing 2s infinite ease-out;
+}
+
+@keyframes radarPing {
+  0% { transform: scale(0.4); opacity: 1; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+.val-pin-label {
+  position: absolute;
+  left: 24px;
+  top: -12px;
+  background: rgba(16, 24, 32, 0.95);
+  border-left: 2px solid var(--val-red);
+  padding: 6px 10px;
+  white-space: nowrap;
+}
+
+.val-pin-label span {
+  display: block;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+}
+
+.val-pin-label small {
+  font-size: 10px;
+  color: var(--val-red);
+  letter-spacing: 0.1em;
+}
+
+.val-map-label {
+  position: absolute;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: #64748b;
+}
+
+.val-map-label.top-left {
+  top: 14px;
+  left: 16px;
+}
+
+.val-map-label.bottom-right {
+  bottom: 14px;
+  right: 16px;
+}
+
+.val-radar-footer {
+  padding: 16px 20px;
+  border-top: 1px solid var(--val-border);
+}
+
+.val-btn-route {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background: var(--val-red);
+  color: var(--val-light);
+  text-decoration: none;
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.05rem;
+  letter-spacing: 0.08em;
+  padding: 14px 20px;
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
+  transition: background-color 0.2s ease;
+}
+
+.val-btn-route:hover {
+  background: #e03543;
+}
+
+/* Нижние карточки каналов связи */
+.val-comms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.val-comm-card {
+  position: relative;
+  background-color: var(--val-surface);
+  padding: 28px 24px;
+  clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 0 100%);
+}
+
+.val-comm-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(255, 70, 85, 0.4);
+  clip-path: polygon(
+    0 0,
+    calc(100% - 20px) 0,
+    100% 20px,
+    100% 100%,
+    0 100%,
+    0 0,
+    1px 1px,
+    1px calc(100% - 1px),
+    calc(100% - 1px) calc(100% - 1px),
+    calc(100% - 1px) 20.5px,
+    calc(100% - 20.5px) 1px,
+    1px 1px
+  );
+  pointer-events: none;
+}
+
+.val-code {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--val-red);
+  letter-spacing: 0.12em;
+  margin-bottom: 10px;
+}
+
+.val-comm-card h3 {
+  font-size: 1.35rem;
+  margin-bottom: 10px;
+}
+
+.val-comm-card p {
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: #a3b1c2;
+  margin: 0;
+}
+
+@media (max-width: 860px) {
+  .val-terminal-grid {
+    grid-template-columns: 1fr;
+  }
+}
