@@ -1,0 +1,346 @@
+@import url('https://googleapis.com');
+
+:root {
+  --val-bg: #090e14;
+  --val-surface: #111922;
+  --val-light: #ece8e1;
+  --val-red: #ff4655;
+  --val-text-muted: #8b978f;
+  --val-border: rgba(236, 232, 225, 0.12);
+}
+
+.val-about {
+  position: relative;
+  background-color: var(--val-bg);
+  color: var(--val-light);
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  padding: 80px 24px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.val-about *,
+.val-about *::before,
+.val-about *::after {
+  box-sizing: border-box;
+}
+
+.val-grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(to right, var(--val-border) 1px, transparent 1px);
+  background-size: 25% 100%;
+  pointer-events: none;
+  opacity: 0.35;
+}
+
+.val-container {
+  position: relative;
+  max-width: 1140px;
+  margin: 0 auto;
+  z-index: 1;
+}
+
+/* Типографика */
+.val-about h1,
+.val-about h2,
+.val-about h3 {
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--val-light);
+  margin: 0;
+}
+
+.val-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: var(--val-red);
+  margin-bottom: 16px;
+}
+
+.val-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--val-red);
+  display: inline-block;
+}
+
+.val-title {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  line-height: 1.05;
+  margin-bottom: 24px;
+}
+
+.val-accent {
+  color: var(--val-red);
+  font-weight: 700;
+}
+
+.val-lead {
+  font-size: 1.125rem;
+  line-height: 1.65;
+  color: #cbd5e1;
+  max-width: 720px;
+  margin-bottom: 64px;
+}
+
+.val-subtitle {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: var(--val-red);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.val-section {
+  margin-bottom: 80px;
+}
+
+.val-section-header {
+  margin-bottom: 32px;
+}
+
+.val-section-header h2 {
+  font-size: 2.25rem;
+}
+
+/* Двухколоночный блок истории и правил */
+.val-story-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 40px;
+  margin-bottom: 80px;
+  align-items: start;
+}
+
+.val-story-block h2 {
+  font-size: 2.25rem;
+  margin-bottom: 20px;
+}
+
+.val-story-block p {
+  line-height: 1.65;
+  color: #cbd5e1;
+  margin-bottom: 16px;
+}
+
+.val-protocol-rules {
+  background: var(--val-surface);
+  border: 1px solid var(--val-border);
+  border-top: 3px solid var(--val-red);
+  padding: 28px;
+}
+
+.val-rules-header {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.25rem;
+  letter-spacing: 0.08em;
+  margin-bottom: 20px;
+  color: var(--val-light);
+}
+
+.val-rules-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.val-rules-list li {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #cbd5e1;
+}
+
+/* Интерактивные табы секторов (Site A / Mid / Site B) */
+.val-zones-wrapper {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 24px;
+}
+
+.val-zone-tabs {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.val-zone-tab {
+  background: var(--val-surface);
+  border: 1px solid var(--val-border);
+  color: var(--val-light);
+  padding: 18px 20px;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition: all 0.2s ease;
+}
+
+.val-zone-tab:hover {
+  border-color: var(--val-red);
+}
+
+.val-zone-tab.active {
+  background: var(--val-red);
+  border-color: var(--val-red);
+  color: var(--val-light);
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
+}
+
+.val-zone-id {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: inherit;
+}
+
+.val-zone-short {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  opacity: 0.9;
+  color: inherit;
+}
+
+.val-zone-display {
+  background: var(--val-surface);
+  border: 1px solid var(--val-border);
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.val-zone-badge {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: var(--val-red);
+  margin-bottom: 12px;
+}
+
+.val-zone-display h3 {
+  font-size: 1.85rem;
+  margin-bottom: 16px;
+}
+
+.val-zone-display p {
+  line-height: 1.6;
+  color: #cbd5e1;
+  margin-bottom: 24px;
+  max-width: 600px;
+}
+
+.val-zone-specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.val-spec-tag {
+  background: rgba(9, 14, 20, 0.8);
+  border: 1px solid var(--val-border);
+  padding: 6px 14px;
+  font-size: 13px;
+  color: var(--val-light);
+}
+
+/* Карточки арсенала в тёмном стиле со скошенной красной рамкой */
+.val-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.val-card {
+  position: relative;
+  background-color: #101820;
+  color: var(--val-light);
+  padding: 32px 28px;
+  clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 0 100%);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  z-index: 1;
+}
+
+.val-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(255, 70, 85, 0.45);
+  clip-path: polygon(
+    0 0,
+    calc(100% - 24px) 0,
+    100% 24px,
+    100% 100%,
+    0 100%,
+    0 0,
+    1px 1px,
+    1px calc(100% - 1px),
+    calc(100% - 1px) calc(100% - 1px),
+    calc(100% - 1px) 24.5px,
+    calc(100% - 24.5px) 1px,
+    1px 1px
+  );
+  pointer-events: none;
+  transition: background-color 0.2s ease;
+}
+
+.val-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 36px;
+  background-color: var(--val-red);
+}
+
+.val-card:hover {
+  transform: translateY(-4px);
+  background-color: #141f2a;
+}
+
+.val-card:hover::before {
+  background-color: var(--val-red);
+}
+
+.val-card-top {
+  margin-bottom: 16px;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.val-code {
+  color: var(--val-red);
+  letter-spacing: 0.12em;
+}
+
+.val-card h3 {
+  color: var(--val-light);
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+}
+
+.val-card p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #a3b1c2;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .val-story-grid,
+  .val-zones-wrapper {
+    grid-template-columns: 1fr;
+  }
+}
